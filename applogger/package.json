@@ -1,0 +1,22 @@
+{
+  "name": "@digivance/applogger",
+  "version": "0.0.1",
+  "description": "Digivance app logger, it should be pretty awesome",
+  "main": "dist/applogger.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Dan Mayor",
+    "email": "dmayor@digivance.com"
+  },
+  "license": "LGPL",
+  "devDependencies": {
+    "@types/node": "^18.11.7",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security"
+  }
+}
