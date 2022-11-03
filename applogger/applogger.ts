@@ -96,7 +96,7 @@ class AppLogger {
         this.logWarning.bind(this);
         this.logError.bind(this);
         this.logCritical.bind(this);
-        
+
         this.loggers = loggers;
         this.flusherId = setInterval(() => this.flushLogs(), 1000);
     }
@@ -121,13 +121,25 @@ class AppLogger {
      */
     public flushLogs() {
         if (this.loggers) {
-            this.loggers.forEach(logger => {
+            this.loggers.forEach(async logger => {
                 const timeToRun = new Date(logger.lastFlush.getTime() + (logger.flushAfterSeconds * 1000));
 
                 if (timeToRun <= new Date()) {
-                    logger.flush();
+                    await logger.flush();
                     logger.lastFlush = new Date();
                 }
+            });
+        }
+    }
+
+    /**
+     * Used when shutting down or anytime you want to force flush all the loggers
+     */
+    public flushLogsNow() {
+        if (this.loggers) {
+            this.loggers.forEach(async logger => {
+                await logger.flush();
+                logger.lastFlush = new Date();
             });
         }
     }
@@ -194,6 +206,14 @@ class AppLogger {
      * @param extra optional extra related data
      */
     public logCritical(message: string, extra?: any) { this.log(LogLevel.critical, message, extra); }
+
+    /**
+     * Call this to force flush any remaining logs and stop the flusher timer
+     */
+    public shutdown() {
+        this.flushLogsNow();
+        clearInterval(this.flusherId);
+    }
 }
 
 export default AppLogger;

@@ -1,0 +1,25 @@
+{
+  "name": "@digivance/applogger-demo",
+  "version": "0.1.0",
+  "description": "Brief demo of the @digivance/applogger",
+  "main": "./dist/demo/main.js",
+  "scripts": {
+    "start": "rimraf ./dist && tsc && node ./dist/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Dan Mayor",
+    "email": "dmayor@digivance.com"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.11.7",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  }
+}

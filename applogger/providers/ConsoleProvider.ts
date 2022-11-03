@@ -29,8 +29,8 @@ export default class ConsoleProvider extends BaseLoggingProvider implements ILog
         super();
 
         if (options) {
-            if (options.minLogLevel) this.minLogLevel = options.minLogLevel;
-            if (options.flushAfterSeconds) this.flushAfterSeconds = options.flushAfterSeconds;
+            this.minLogLevel = options.minLogLevel ?? this.minLogLevel;
+            this.flushAfterSeconds = options.flushAfterSeconds ?? this.flushAfterSeconds;
         }
     }
 
@@ -41,12 +41,16 @@ export default class ConsoleProvider extends BaseLoggingProvider implements ILog
         const logs = this.pendingLogs;
         this.pendingLogs = [];
 
+        let msg = '';
+
         if (logs) {
             logs.forEach(log => {
-                console.log(`${log.date} [${LogLevel[log.logLevel]}]: ${log.message}`);
+                msg += `${log.date} [${LogLevel[log.logLevel]}]: ${log.message}\n`;
                 if (log.extra)
-                    console.log(log.extra);
+                    msg += `${JSON.stringify(log.extra)}\n`;
             });
+
+            console.log(msg);
         }
     }
 }
