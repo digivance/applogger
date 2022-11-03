@@ -1,5 +1,5 @@
 import AppLogger, { LogLevel } from "@digivance/applogger/applogger";
-import ConsoleLogger from "@digivance/applogger/providers/ConsoleProvider";
+import ConsoleProvider from "@digivance/applogger/providers/ConsoleProvider";
 import FileProvider, { FileProviderRotationInterval } from "@digivance/applogger/providers/FileProvider";
 
 /**
@@ -9,7 +9,7 @@ const logger = new AppLogger([
     /**
      * Tell it to include a ConsoleProvider (will log to the console)
      */
-    new ConsoleLogger({ minLogLevel: LogLevel.trace }),
+    new ConsoleProvider({ minLogLevel: LogLevel.trace }),
 
     /**
      * Tell it to include a FileProvider (will log to files)
