@@ -33,4 +33,10 @@ logger.logInfo(
     { id: 123, name: 'some user', action: 'did some thing' }
 );
 
+logger.logWarning('Warning message, something might be breaking');
+
+logger.logError('Oh no it\'s broken!');
+
+logger.logCritical('The sky is falling!');
+
 logger.shutdown();

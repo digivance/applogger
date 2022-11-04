@@ -45,7 +45,31 @@ export default class ConsoleProvider extends BaseLoggingProvider implements ILog
 
         if (logs) {
             logs.forEach(log => {
-                msg += `${log.date} [${LogLevel[log.logLevel]}]: ${log.message}\n`;
+                msg += log.date;
+
+                switch (log.logLevel) {
+                    case LogLevel.trace:
+                        msg += ` [TRACE]: `;
+                        break;
+                    case LogLevel.debug:
+                        msg += `\x1b[36m [DEBUG]\x1b[0m: `;
+                        break;
+                    case LogLevel.info:
+                        msg += `\x1b[34m [INFO]\x1b[0m: `;
+                        break;
+                    case LogLevel.warning:
+                        msg += `\x1b[33m [WARNING]\x1b[0m: `;
+                        break;
+                    case LogLevel.error:
+                        msg += `\x1b[31m [ERROR]\x1b[0m: `;
+                        break;
+                    case LogLevel.critical:
+                        msg += `\x1b[35m [CRITICAL]\x1b[0m: `;
+                        break;
+                }
+
+                msg += `${log.message} \n`;
+
                 if (log.extra)
                     msg += `${JSON.stringify(log.extra)}\n`;
             });
