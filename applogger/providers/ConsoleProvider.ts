@@ -1,3 +1,4 @@
+import moment from "moment";
 import { LogLevel } from "../applogger";
 import ILoggingProvider, { BaseLoggingProvider } from "./ILoggingProvider";
 
@@ -43,9 +44,9 @@ export default class ConsoleProvider extends BaseLoggingProvider implements ILog
 
         let msg = '';
 
-        if (logs) {
+        if (logs && logs.length > 0) {
             logs.forEach(log => {
-                msg += log.date;
+                msg += `${moment(log.date).utc().format("YYYY-MM-DD HH:mm:ss")} (UTC)`;
 
                 switch (log.logLevel) {
                     case LogLevel.trace:

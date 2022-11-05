@@ -1,4 +1,5 @@
 import * as fsa from 'fs/promises';
+import moment from 'moment';
 import path from 'path';
 import { LogLevel } from "../applogger";
 import ILoggingProvider, { BaseLoggingProvider } from "./ILoggingProvider";
@@ -142,9 +143,10 @@ export default class FileProvider extends BaseLoggingProvider implements ILoggin
 
         let logMessage = ''
 
-        if (logs) {
+        if (logs && logs.length > 0) {
             logs.forEach(async log => {
-                logMessage += `${log.date} [${LogLevel[log.logLevel]}]: ${log.message}\n`;
+                logMessage += `${moment(log.date).utc().format("YYYY-MM-DD HH:mm:ss")} (UTC) [${LogLevel[log.logLevel]}]: ${log.message}\n`;
+
                 if (log.extra) {
                     logMessage += `${JSON.stringify(log.extra)}\n`;
                 }

@@ -1,12 +1,12 @@
 {
   "name": "@digivance/applogger",
-  "version": "0.0.1",
-  "description": "Digivance app logger, it should be pretty awesome",
+  "version": "0.1.1",
+  "description": "Simple and effective NodeJS logger",
   "main": "dist/applogger.js",
   "scripts": {
-    "build": "tsc && copyfiles \"./package.json\" \"./dist\""
+    "build": "tsc && copyfiles \"./package.json\" \"./dist\" && copyfiles \"./README.md\" \"./dist\""
   },
-  "keywords": [],
+  "repository": "https://github.com/digivance/applogger",
   "author": {
     "name": "Dan Mayor",
     "email": "dmayor@digivance.com"
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "fs": "^0.0.1-security",
+    "moment": "^2.29.4",
     "path": "^0.12.7"
   }
 }
